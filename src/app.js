@@ -4,50 +4,51 @@ const app = express();
 
 app.use(express.json())
 
-const livros = [
-    { id: 1, "titulo": "Senhor dos Aneis" },
-    { id: 2, "titulo": "O Hobiit" }
+const linguagens = [
+    { id: 1, "titulo": "node", "image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", },
+    { id: 2, "titulo": "java", "image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", },
+    { id: 3, "titulo": "react", "image": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", },
 ]
 
 app.get('/', (req, res) => {
-    res.status(200).send('Curso de Node');
+    res.status(200).send('Desenvolvedor Felipe Silva 🙅‍♂️');
 })
 
-app.get('/livros/:id', (req, res) => {
-    let index = buscaLivro(req.params.id);
-    res.json(livros[index])
+app.get('/linguagens/:id', (req, res) => {
+    let index = buscalinguagem(req.params.id);
+    res.json(linguagens[index])
 })
 
-app.get('/livros', (req, res) => {
-    res.status(200).json(livros);
+app.get('/linguagens', (req, res) => {
+    res.status(200).json(linguagens);
 })
 
-app.post('/livros', (req, res) => {
-    livros.push(req.body);
-    res.status(201).send('Livro foi cadastrado com sucesso');
+app.post('/linguagens', (req, res) => {
+    linguagens.push(req.body);
+    res.status(201).send('linguagem foi cadastrada com sucesso');
 })
 
-app.put('/livros/:id', (req, res) => {
+app.put('/linguagens/:id', (req, res) => {
 
-    let index = buscaLivro(req.params.id);
-    livros[index].titulo = req.body.titulo;
-    res.json(livros);
+    let index = buscalinguagem(req.params.id);
+    linguagens[index].titulo = req.body.titulo;
+    res.json(linguagens);
 
-    res.status(201).send('Livro foi atualizardo com sucesso');
+    res.status(201).send('linguagem foi atualizarda com sucesso');
 })
 
-app.delete('/livros/:id', (req, res) => {
+app.delete('/linguagens/:id', (req, res) => {
 
     let { id } = req.params;
 
-    let index = buscaLivro(id);
-    livros.splice(index, 1);
+    let index = buscalinguagem(id);
+    linguagens.splice(index, 1);
 
-    res.send(`Livro ${id} removido com sucesso`);
+    res.send(`linguagem ${id} removida com sucesso`);
 })
 
-function buscaLivro(id) {
-    return livros.findIndex(livro => livro.id == id);
+function buscalinguagem(id) {
+    return linguagens.findIndex(linguagem => linguagem.id == id);
 }
 
 export default app
